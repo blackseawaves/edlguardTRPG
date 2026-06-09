@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>에델가드 연대기</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            .slide {
+                transition: opacity 1s ease-in-out;
+            }
+        </style>
+    </head>
+    <body class="bg-black text-white font-sans overflow-x-hidden">
+        <!-- 헤더 -->
+        <header class="fixed top-0 w-full z-[60] bg-black/80 backdrop-blur-md border-b border-white/10">
+            <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-8 py-3">
+                <!-- 좌측: 로고 + 타이틀 영역 -->
+                <div class="flex items-center gap-4">
+                    <!-- [여기 로고 이미지 넣으세요] -->
+                    <a href="/">
+                        <img src="img/logo.png" alt="Logo" class="h-10 w-auto object-contain" />
+                    </a>
+                    <div class="text-lg sm:text-xl font-bold text-red-500 tracking-wider">에델가드 연대기</div>
+                </div>
+
+                <!-- 중앙: 드롭다운 네비게이션 -->
+                <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                    <div class="relative group">
+                        <button class="hover:text-red-500 transition-colors">게임소개</button>
+                        <div class="absolute left-0 top-full pt-2 hidden group-hover:block w-40">
+                            <div class="bg-black/90 border border-gray-700 py-2 shadow-xl">
+                                <a
+                                    href="#"
+                                    data-menu="intro-play"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >게임 플레이 방식</a
+                                >
+                                <a
+                                    href="#"
+                                    data-menu="intro-map"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >맵 구성</a
+                                >
+                                <a
+                                    href="#"
+                                    data-menu="intro-maker"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >제작자</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <button class="hover:text-red-500 transition-colors">직업 소개</button>
+                        <div class="absolute left-0 top-full pt-2 hidden group-hover:block w-40">
+                            <div class="bg-black/90 border border-gray-700 py-2 shadow-xl">
+                                <a
+                                    href="#"
+                                    data-menu="class-base"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >기본클래스</a
+                                >
+                                <a
+                                    href="#"
+                                    data-menu="class-sub"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >서브클래스</a
+                                >
+                                <a
+                                    href="#"
+                                    data-menu="class-hidden"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >히든클래스</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <button class="hover:text-red-500 transition-colors">npc 소개</button>
+                        <div class="absolute left-0 top-full pt-2 hidden group-hover:block w-40">
+                            <div class="bg-black/90 border border-gray-700 py-2 shadow-xl">
+                                <a
+                                    href="#"
+                                    data-menu="npc-act1"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >1막</a
+                                >
+                                <a
+                                    href="#"
+                                    data-menu="npc-act2"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >2막</a
+                                >
+                                <a
+                                    href="#"
+                                    data-menu="npc-act3"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >3막</a
+                                >
+                                <a
+                                    href="#"
+                                    data-menu="npc-act4"
+                                    class="menu-item block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    >4막</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 보스몹 소개 드롭다운 HTML 가이드 예시 -->
+                    <div class="relative group">
+                        <button class="hover:text-red-500 transition-colors">보스몹 소개</button>
+                        <div class="absolute left-0 top-full pt-2 hidden group-hover:block w-40">
+                            <div class="bg-black/90 border border-gray-700 py-2 shadow-xl">
+                                <!-- data-boss 값에 각 보스의 고유 ID를 매칭합니다 -->
+                                <a
+                                    href="#"
+                                    class="menu-item boss-link block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    data-boss="boss-pascal"
+                                    >메인보스: 파스칼</a
+                                >
+                                <a
+                                    href="#"
+                                    class="menu-item boss-link block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    data-boss="boss-undine"
+                                    >메인보스: 운디네</a
+                                >
+                                <a
+                                    href="#"
+                                    class="menu-item boss-link block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    data-boss="boss-longinus"
+                                    >메인보스: 롱기누스</a
+                                >
+                                <a
+                                    href="#"
+                                    class="menu-item boss-link block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    data-boss="boss-demonking"
+                                    >최종마왕</a
+                                >
+                                <a
+                                    href="#"
+                                    class="menu-item boss-link block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    data-boss="boss-nepapobi"
+                                    >히든보스: 네파포비</a
+                                >
+                                <a
+                                    href="#"
+                                    class="menu-item boss-link block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    data-boss="boss-jaemunpil"
+                                    >히든보스: 재문필</a
+                                >
+                                <a
+                                    href="#"
+                                    class="menu-item boss-link block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    data-boss="boss-whtjs02"
+                                    >히든보스: whtjs02</a
+                                >
+                                <a
+                                    href="#"
+                                    class="menu-item boss-link block px-4 py-2 hover:bg-red-900/50 hover:text-white transition-all"
+                                    data-boss="boss-mild"
+                                    >히든보스: 마일드</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- 우측: 마스터 정보 -->
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden sm:block">
+                        <div class="text-xs font-bold">남찬우</div>
+                        <div class="text-[10px] text-gray-400">시스템 마스터</div>
+                    </div>
+                    <div
+                        class="w-8 h-8 bg-gray-800 border border-red-500 rounded-full flex items-center justify-center font-bold text-red-500 text-[9px]"
+                    >
+                        GM
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 메인 배너 -->
+        <section class="relative h-screen w-full flex items-center justify-center">
+            <div id="slider" class="absolute inset-0 z-0">
+                <img src="img/sc1.jpeg" class="slide absolute w-full h-full object-cover opacity-100" />
+                <img src="img/sc2.jpeg" class="slide absolute w-full h-full object-cover opacity-0" />
+            </div>
+
+            <div class="relative z-10 w-[30vw] h-[30vw] max-w-[300px] max-h-[300px] min-w-[150px] min-h-[150px]">
+                <button
+                    id="gameStartBtn"
+                    class="w-full h-full group relative cursor-pointer outline-none transition-opacity active:opacity-70 overflow-visible"
+                    onmouseenter="playHoverSound()"
+                    onclick="playReadySound()"
+                >
+                    <img
+                        src="img/구동런처.png"
+                        class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
+                    />
+                    <img
+                        src="img/구동런처 호버.png"
+                        class="absolute inset-0 w-full h-full object-contain opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-150"
+                    />
+                </button>
+            </div>
+        </section>
+
+        <!-- 엘소드 스타일 런처 팝업 -->
+        <div id="launcherModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/60">
+            <div class="w-[600px] bg-[#1a1a1a] border border-[#333] shadow-2xl flex flex-col overflow-hidden">
+                <div
+                    class="h-8 bg-gradient-to-b from-[#333] to-[#1a1a1a] flex justify-between items-center px-3 border-b border-black"
+                >
+                    <span class="text-xs text-gray-200 font-bold tracking-wide">APEUNBANG GAME LAUNCHER</span>
+                    <button id="closeBtn" class="text-gray-400 hover:text-white text-lg">✕</button>
+                </div>
+                <div class="h-[300px] w-full bg-black relative">
+                    <img src="img/Gsni.jpeg" class="w-full h-full object-cover opacity-90" />
+                    <div class="absolute bottom-4 left-4">
+                        <div class="text-orange-500 text-xs font-bold">UPDATE CODE:</div>
+                        <div class="text-white text-sm font-bold tracking-widest">VORTEX OF DIMENSION</div>
+                    </div>
+                </div>
+                <div class="p-4 bg-[#1a1a1a]">
+                    <div class="text-xs text-gray-400 mb-4 flex justify-between">
+                        <span>Updating Client...</span>
+                        <span id="currentFileText" class="font-mono">data/wbdcap32.dll</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-[10px] text-gray-500 mb-1">
+                                <span>Current File</span><span id="p1">0%</span>
+                            </div>
+                            <div class="w-full h-2 bg-black border border-[#333]">
+                                <div id="bar1" class="h-full bg-[#666]" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[10px] text-gray-500 mb-1">
+                                <span>Total File</span><span id="p2">0%</span>
+                            </div>
+                            <div class="w-full h-2 bg-black border border-[#333]">
+                                <div id="bar2" class="h-full bg-red-600" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="main.js"></script>
+
+        <!-- 네비게이션 콘텐츠 팝업 모달 (이 틀이 있어야 자바스크립트가 활성화시킵니다) -->
+        <div
+            id="contentModal"
+            class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+        >
+            <div
+                class="w-[700px] max-h-[80vh] bg-[#121212] border-2 border-red-900/50 shadow-[0_0_30px_rgba(239,68,68,0.1)] flex flex-col overflow-hidden rounded"
+            >
+                <!-- 모달 헤더 -->
+                <div
+                    class="h-10 bg-gradient-to-r from-red-950 to-[#121212] flex justify-between items-center px-4 border-b border-white/10"
+                >
+                    <span id="contentTitle" class="text-sm text-red-400 font-bold tracking-wider">메뉴 제목</span>
+                    <button id="contentCloseBtn" class="text-gray-400 hover:text-red-500 text-lg transition-colors">
+                        ✕
+                    </button>
+                </div>
+                <!-- 모달 본문 -->
+                <div id="contentBody" class="p-6 overflow-y-auto text-gray-300 space-y-4 text-sm leading-relaxed">
+                    <!-- 자바스크립트에서 데이터가 동적으로 주입됩니다 -->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
