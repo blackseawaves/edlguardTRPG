@@ -1,5 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
     // =================================================================================
+    // 0. [NEW LOGIC] 메인 배너 5초 주기 자동 슬라이더 엔진 구동 프로토콜
+    // =================================================================================
+    const slides = document.querySelectorAll("#slider .slide");
+    let currentSlideIndex = 0;
+
+    // 슬라이드가 정상적으로 2개 이상 존재할 때만 작동 인터벌 가동
+    if (slides.length > 1) {
+        setInterval(() => {
+            // 1. 현재 출력 중인 이미지 숨기기 (opacity-100 제거 -> opacity-0 주입)
+            slides[currentSlideIndex].classList.remove("opacity-100");
+            slides[currentSlideIndex].classList.add("opacity-0");
+
+            // 2. 다음 슬라이드 인덱스 연산 연계
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+
+            // 3. 새로 매칭된 이미지 활성화 (opacity-0 제거 -> opacity-100 주입)
+            slides[currentSlideIndex].classList.remove("opacity-0");
+            slides[currentSlideIndex].classList.add("opacity-100");
+        }, 6500); // 5000ms = 정확히 5초 주기 무한 순환 연산
+    }
+
+    // =================================================================================
+    // 1. 기존 런처 팝업 및 게이지 애니메이션 로직 (여기서부터 기존 코드가 이어집니다...)
+    // =================================================================================
+    // =================================================================================
     // 1. 기존 런처 팝업 및 게이지 애니메이션 로직
     // =================================================================================
     const btn = document.getElementById("gameStartBtn");
@@ -1355,28 +1380,32 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     ];
 
-    // 보스 도감 화면 갱신 엔진 함수
+    // =================================================================================
+    // 4. 보스 도감 화면 갱신 엔진 함수 (좌측 세로형 사각형 버튼 탭 렌더링 최적화)
+    // =================================================================================
     function renderBossDOM() {
         const boss = bossDatabase[currentBossIndex];
         const phase = boss.phases[currentPhaseIndex];
 
         bossTypeTag.innerText = boss.type;
         if (boss.type === "HIDDEN BOSS") {
-            bossTypeTag.className = "text-xs bg-purple-700 text-white px-2 py-0.5 font-bold rounded tracking-widest";
+            bossTypeTag.className =
+                "text-xs bg-purple-700 text-white px-2 py-1 font-bold rounded tracking-widest shadow-[0_0_8px_rgba(147,51,234,0.5)]";
         } else {
-            bossTypeTag.className = "text-xs bg-red-600 text-white px-2 py-0.5 font-bold rounded tracking-widest";
+            bossTypeTag.className =
+                "text-xs bg-red-600 text-white px-2 py-1 font-bold rounded tracking-widest shadow-[0_0_8px_rgba(220,38,38,0.5)]";
         }
         bossMainTitle.innerText = boss.name;
 
-        // 상단 페이즈 단추 동적 매칭
+        // 🚨 자바스크립트 핵심 변경: 좌측 사이드바에 큼직한 사각형 모양의 단추 세로 배열 컴파일
         bossPhaseTabContainer.innerHTML = "";
         boss.phases.forEach((p, idx) => {
             const btn = document.createElement("button");
-            btn.innerText = `${idx + 1}P`;
-            btn.className = `px-3 py-1 text-[11px] font-bold rounded transition-all ${
+            btn.innerText = `${idx + 1} 페이즈`;
+            btn.className = `w-full h-12 text-xs font-extrabold rounded-md transition-all text-center border ${
                 idx === currentPhaseIndex
-                    ? "bg-red-700 text-white shadow-[0_0_8px_rgba(239,68,68,0.4)]"
-                    : "text-gray-400 hover:text-white hover:bg-neutral-800"
+                    ? "bg-gradient-to-b from-red-900 to-red-700 text-white border-red-500 shadow-[0_0_12px_rgba(239,68,68,0.4)]"
+                    : "text-gray-400 bg-neutral-900/60 border-neutral-800 hover:text-white hover:bg-neutral-800"
             }`;
             btn.addEventListener("click", () => {
                 currentPhaseIndex = idx;
@@ -1385,7 +1414,7 @@ document.addEventListener("DOMContentLoaded", () => {
             bossPhaseTabContainer.appendChild(btn);
         });
 
-        // 이미지 경로 및 예외 블록 감지
+        // 대형 이미지 및 텍스트 데이터 매핑
         bossMainImg.src = phase.img;
         bossMainImg.onload = () => {
             bossImgFallback.classList.add("hidden");
@@ -1399,24 +1428,26 @@ document.addEventListener("DOMContentLoaded", () => {
         bossStatText.innerText = phase.stats;
         bossLoreText.innerHTML = phase.lore;
 
-        // 하단 스킬 스크롤 리스트 생성
+        // 하단 스킬 3배 확장 스펙 리스트 자동 매칭
         bossSkillBookContainer.innerHTML = "";
         phase.skills.forEach((skill) => {
             const skillImgSrc = skill.img ? skill.img : "cha/스킬공용더미.jpeg";
             const skillCardHTML = `
-            <div class="p-3 bg-neutral-950 border border-neutral-900 rounded flex flex-col sm:flex-row gap-4 items-center">
-                <div class="w-16 h-20 bg-neutral-900 border border-neutral-800 overflow-hidden rounded flex-shrink-0 relative aspect-[3/4]">
+            <div class="p-4 bg-neutral-950 border-2 border-neutral-900/60 rounded-lg flex flex-col sm:flex-row gap-5 items-center hover:border-red-900/40 transition-colors shadow-md">
+                <div class="w-28 h-36 bg-neutral-900 border border-neutral-700 overflow-hidden rounded-md flex-shrink-0 relative aspect-[3/4] shadow-md">
                     <img src="${skillImgSrc}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                    <div class="hidden absolute inset-0 text-[8px] text-gray-600 items-center justify-center bg-neutral-950 text-center p-1">SKILL IMG</div>
+                    <div class="hidden absolute inset-0 text-[10px] text-gray-500 items-center justify-center bg-neutral-950 text-center p-1 font-bold">3:4 SKILL</div>
                 </div>
-                <div class="flex-1 w-full space-y-0.5">
-                    <p class="font-bold text-orange-400 text-xs">${skill.name}</p>
-                    <p class="text-gray-400 text-[11px] leading-relaxed">${skill.desc}</p>
+                <div class="flex-1 w-full space-y-2">
+                    <p class="font-extrabold text-orange-400 text-base tracking-wide">${skill.name}</p>
+                    <p class="text-gray-300 text-sm leading-relaxed font-medium">${skill.desc}</p>
                 </div>
             </div>`;
             bossSkillBookContainer.insertAdjacentHTML("beforeend", skillCardHTML);
         });
     }
+
+    // [이하 모달 닫기 및 .boss-link 클릭 이벤트 리스너들은 기존과 동일합니다]
 
     // 좌우 스위칭 네비게이션 연결
     bossPrevBtn.addEventListener("click", () => {
