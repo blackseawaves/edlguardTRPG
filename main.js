@@ -1601,3 +1601,155 @@ function playReadySound() {
         console.log("오디오 재생 실패:", error);
     });
 }
+
+// =================================================================================
+// 🌍 [MAIN SYSTEM] 상시 독립형 플로팅 미니 뮤직 플레이어 최종 안정화 서킷
+// =================================================================================
+window.addEventListener("load", () => {
+    // 1. 오디오 재생 목록 데이터베이스 명세 (영어 경로 고정)
+    const playlist = [
+        {
+            title: "guilty gear still in the dark cover",
+            artist: "System Master OST",
+            src: "sound/guilty_remix.mp3",
+            cover: "micon/GTG.jpeg",
+        },
+        {
+            title: "Dungeon_Shredlock",
+            artist: "Battle OST Vol.2",
+            src: "sound/Dungeon_Shredlock.mp3",
+            cover: "micon/DWM.jpeg",
+        },
+        {
+            title: "Pursuit_and_Annihilation_Battle",
+            artist: "Battle OST Vol.1",
+            src: "sound/Pursuit_and_Annihilation_Battle.mp3",
+            cover: "micon/WRD.jpeg",
+        },
+    ];
+
+    let currentTrackIndex = 0;
+
+    // 2. DOM 엘리먼트 맵 래핑
+    const audio = document.getElementById("bgmAudio");
+    const playBtn = document.getElementById("playerPlayBtn");
+    const prevBtn = document.getElementById("playerPrevBtn");
+    const nextBtn = document.getElementById("playerNextBtn");
+    const progressBar = document.getElementById("playerProgressBar");
+    const currentTimeText = document.getElementById("playerCurrentTime");
+    const durationText = document.getElementById("playerDuration");
+    const trackTitle = document.getElementById("playerTrackTitle");
+    const artistText = document.getElementById("playerArtist");
+    const cdImg = document.getElementById("playerCdImg");
+
+    if (!audio || !playBtn) {
+        console.error("❌ [AUDIO ENGINE] 필수 오디오 컴포넌트를 찾을 수 없습니다.");
+        return;
+    }
+
+    // 3. 분/초 시간 변환기
+    function formatTime(secs) {
+        if (isNaN(secs) || secs === Infinity) return "00:00";
+        const m = Math.floor(secs / 60)
+            .toString()
+            .padStart(2, "0");
+        const s = Math.floor(secs % 60)
+            .toString()
+            .padStart(2, "0");
+        return `${m}:${s}`;
+    }
+
+    // 4. 트랙 로드 루틴
+    function loadTrack(index) {
+        if (!playlist[index]) return;
+        const track = playlist[index];
+
+        audio.src = track.src;
+        trackTitle.innerText = track.title;
+        artistText.innerText = track.artist;
+        cdImg.src = track.cover;
+
+        progressBar.value = 0;
+        currentTimeText.innerText = "00:00";
+        durationText.innerText = "00:00";
+    }
+
+    // 🛠️ main.js 내부 아이콘 스위칭 연산 코드 교체
+
+    // [재생/정지 아이콘 정의]
+    const svgPlay = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" class="ml-0.5"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>`;
+    const svgPause = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><rect x="14" y="4" width="4" height="16" rx="1"></rect><rect x="6" y="4" width="4" height="16" rx="1"></rect></svg>`;
+
+    // 5. 재생/정지 마스터 토글 함수 수정
+    function togglePlay() {
+        if (!audio) return;
+
+        if (audio.paused) {
+            audio
+                .play()
+                .then(() => {
+                    playBtn.innerHTML = svgPause; // ⏸ 그래픽 아이콘 주입
+                    cdImg.classList.add("animate-spin-cd");
+                })
+                .catch((err) => console.log("🔒 브라우저 자동 재생 제약 방어"));
+        } else {
+            audio.pause();
+            playBtn.innerHTML = svgPlay; // ▶ 그래픽 아이콘 주입
+            cdImg.classList.remove("animate-spin-cd");
+        }
+    }
+
+    // 6. 트랙 변경 핸들러 함수 내부 수정
+    function changeTrack(direction) {
+        currentTrackIndex = (currentTrackIndex + direction + playlist.length) % playlist.length;
+        const wasPlaying = !audio.paused;
+
+        loadTrack(currentTrackIndex);
+
+        if (wasPlaying) {
+            audio.play().then(() => {
+                playBtn.innerHTML = svgPause; // ⏸ 그래픽 아이콘 주입
+                cdImg.classList.add("animate-spin-cd");
+            });
+        } else {
+            playBtn.innerHTML = svgPlay; // ▶ 그래픽 아이콘 주입
+            cdImg.classList.remove("animate-spin-cd");
+        }
+    }
+
+    // 7. 실시간 이벤트 하네스 연결
+    playBtn.addEventListener("click", togglePlay);
+
+    // 오디오 메타데이터 및 실시간 스트리밍 시간 복구 랙
+    const initDuration = () => {
+        if (audio.duration) {
+            durationText.innerText = formatTime(audio.duration);
+        }
+    };
+    audio.addEventListener("loadedmetadata", initDuration);
+    audio.addEventListener("playing", initDuration);
+
+    // 실시간 타임라인 스크러버 동기화
+    audio.addEventListener("timeupdate", () => {
+        if (!audio.duration || isNaN(audio.duration)) return;
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progress;
+        currentTimeText.innerText = formatTime(audio.currentTime);
+    });
+
+    // 슬라이더 바 조작 싱크
+    progressBar.addEventListener("input", () => {
+        if (!audio.duration || isNaN(audio.duration)) return;
+        const seekTime = (progressBar.value / 100) * audio.duration;
+        audio.currentTime = seekTime;
+    });
+
+    // 재생 종료 시 다음곡 전환
+    audio.addEventListener("ended", () => changeTrack(1));
+    if (prevBtn) prevBtn.addEventListener("click", () => changeTrack(-1));
+    if (nextBtn) nextBtn.addEventListener("click", () => changeTrack(1));
+
+    // 마스터 시퀀스 시동
+    loadTrack(currentTrackIndex);
+    console.log("✅ [AUDIO ENGINE] 뮤직 플레이어 코어 서킷 준비 완료.");
+});

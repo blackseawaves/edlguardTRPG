@@ -13,217 +13,213 @@
     </head>
     <body class="bg-black text-white font-sans overflow-x-hidden">
         <!-- 헤더 -->
-        <header class="fixed top-0 w-full z-[60] bg-black/80 backdrop-blur-md border-b border-white/10">
-            <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-8 py-3">
-                <!-- 좌측: 로고 + 타이틀 영역 -->
+        <header
+            class="fixed top-0 w-full z-[100] bg-black/90 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3"
+        >
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
                 <div class="flex items-center gap-4">
-                    <!-- [여기 로고 이미지 넣으세요] -->
-                    <a href="/">
-                        <img src="img/logo.png" alt="Logo" class="h-10 w-auto object-contain" />
-                    </a>
-                    <div class="text-lg sm:text-xl font-bold text-red-500 tracking-wider">에델가드 연대기</div>
-                </div>
-
-                <nav
-                    class="fixed top-0 left-0 right-0 z-[100] bg-black/90 border-b border-white/10 px-4 md:px-8 py-3 md:py-4 transition-all"
-                >
-                    <div
-                        class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0"
-                    >
-                        <div class="flex items-center">
-                            <span
-                                class="text-lg md:text-xl font-extrabold tracking-widest text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.6)] animate-pulse"
-                            >
-                                에델가드 연대기
-                            </span>
-                        </div>
+                    <a href="/" class="relative block group">
+                        <img
+                            src="img/logo.png"
+                            alt="Logo"
+                            class="h-10 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(239,68,68,0.9)] animate-pulse"
+                        />
 
                         <div
-                            class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-x-6 text-xs sm:text-sm font-bold"
-                        >
-                            <div class="relative group">
-                                <button
-                                    class="text-white hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-all duration-300 py-1 px-1.5 rounded"
-                                >
-                                    게임소개
-                                </button>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-2 hidden group-hover:block w-32 sm:w-40 z-[120]"
-                                >
-                                    <div class="bg-black/95 border border-neutral-800 py-1.5 shadow-2xl rounded-md">
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="intro-play"
-                                            >시스템 매트릭스</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="intro-map"
-                                            >액트별 맵 구성</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="intro-maker"
-                                            >시스템 디렉터</a
-                                        >
-                                    </div>
+                            class="absolute inset-0 bg-red-500/10 mix-blend-color-dodge rounded blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                        ></div>
+                    </a>
+
+                    <div
+                        class="text-lg sm:text-xl font-extrabold tracking-wider text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.6)] animate-pulse"
+                    >
+                        에델가드 연대기
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-8">
+                    <div class="flex items-center gap-x-3 sm:gap-x-6 text-xs sm:text-sm font-bold">
+                        <div class="relative group">
+                            <button
+                                class="text-white hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-all duration-300 py-1 px-1.5 rounded"
+                            >
+                                게임소개
+                            </button>
+                            <div
+                                class="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-2 hidden group-hover:block w-32 sm:w-40 z-[120]"
+                            >
+                                <div class="bg-black/95 border border-neutral-800 py-1.5 shadow-2xl rounded-md">
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="intro-play"
+                                        >시스템 매트릭스</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="intro-map"
+                                        >액트별 맵 구성</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="intro-maker"
+                                        >시스템 디렉터</a
+                                    >
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="relative group">
-                                <button
-                                    class="text-white hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-all duration-300 py-1 px-1.5 rounded"
-                                >
-                                    직업소개
-                                </button>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-2 hidden group-hover:block w-32 sm:w-40 z-[120]"
-                                >
-                                    <div class="bg-black/95 border border-neutral-800 py-1.5 shadow-2xl rounded-md">
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="class-base"
-                                            >12대 기본 클래스</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="class-sub"
-                                            >고유 서브클래스</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="class-hidden"
-                                            >최상위 히든클래스</a
-                                        >
-                                    </div>
+                        <div class="relative group">
+                            <button
+                                class="text-white hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-all duration-300 py-1 px-1.5 rounded"
+                            >
+                                직업소개
+                            </button>
+                            <div
+                                class="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-2 hidden group-hover:block w-32 sm:w-40 z-[120]"
+                            >
+                                <div class="bg-black/95 border border-neutral-800 py-1.5 shadow-2xl rounded-md">
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="class-base"
+                                        >12대 기본 클래스</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="class-sub"
+                                        >고유 서브클래스</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="class-hidden"
+                                        >최상위 히든클래스</a
+                                    >
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="relative group">
-                                <button
-                                    class="text-white hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-all duration-300 py-1 px-1.5 rounded"
-                                >
-                                    NPC소개
-                                </button>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-2 hidden group-hover:block w-32 sm:w-40 z-[120]"
-                                >
-                                    <div class="bg-black/95 border border-neutral-800 py-1.5 shadow-2xl rounded-md">
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="npc-act1"
-                                            >1막 오리진 허브</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="npc-act2"
-                                            >2막 정령의 장벽</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="npc-act3"
-                                            >3막 대신전 사제</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-menu="npc-act4"
-                                            >4막 공허 영역</a
-                                        >
-                                    </div>
+                        <div class="relative group">
+                            <button
+                                class="text-white hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-all duration-300 py-1 px-1.5 rounded"
+                            >
+                                NPC소개
+                            </button>
+                            <div
+                                class="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-2 hidden group-hover:block w-32 sm:w-40 z-[120]"
+                            >
+                                <div class="bg-black/95 border border-neutral-800 py-1.5 shadow-2xl rounded-md">
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="npc-act1"
+                                        >1막 오리진 허브</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="npc-act2"
+                                        >2막 정령의 장벽</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="npc-act3"
+                                        >3막 대신전 사제</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-menu="npc-act4"
+                                        >4막 공허 영역</a
+                                    >
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="relative group">
-                                <button
-                                    class="text-white hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-all duration-300 py-1 px-1.5 rounded"
-                                >
-                                    보스몹소개
-                                </button>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-2 hidden group-hover:block w-40 z-[120]"
-                                >
-                                    <div class="bg-black/95 border border-neutral-800 py-1.5 shadow-2xl rounded-md">
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-pascal"
-                                            >메인보스: 파스칼</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-undine"
-                                            >메인보스: 운디네</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-longinus"
-                                            >메인보스: 롱기누스</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-demonking"
-                                            >최종 메인보스: 마왕</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-udumaksiki"
-                                            >히든보스: 우두막시키</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-nepapobi"
-                                            >히든보스: 네파포비</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-jaemunpil"
-                                            >히든보스: 재문필</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-whtjs02"
-                                            >히든보스: whtjs02</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="menu-item boss-link block px-3 py-2 text-neutral-400 hover:text-red-500 hover:bg-neutral-900/60 transition-all"
-                                            data-boss="boss-mild"
-                                            >히든보스: 마일드</a
-                                        >
-                                    </div>
+                        <div class="relative group">
+                            <button
+                                class="text-white hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-all duration-300 py-1 px-1.5 rounded"
+                            >
+                                보스몹소개
+                            </button>
+                            <div
+                                class="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full pt-2 hidden group-hover:block w-40 z-[120]"
+                            >
+                                <div class="bg-black/95 border border-neutral-800 py-1.5 shadow-2xl rounded-md">
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-pascal"
+                                        >메인보스: 파스칼</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-undine"
+                                        >메인보스: 운디네</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-longinus"
+                                        >메인보스: 롱기누스</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-demonking"
+                                        >최종 메인보스: 마왕</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-udumaksiki"
+                                        >히든보스: 우두막시키</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-nepapobi"
+                                        >히든보스: 네파포비</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-jaemunpil"
+                                        >히든보스: 재문필</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-whtjs02"
+                                        >히든보스: whtjs02</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="menu-item boss-link block px-3 py-2 text-white hover:text-red-500 hover:bg-neutral-900/60 transition-all"
+                                        data-boss="boss-mild"
+                                        >히든보스: 마일드</a
+                                    >
                                 </div>
                             </div>
                         </div>
                     </div>
-                </nav>
 
-                <!-- 우측: 마스터 정보 -->
-                <div class="flex items-center gap-3">
-                    <div class="text-right hidden sm:block">
-                        <div class="text-xs font-bold">남찬우</div>
-                        <div class="text-[10px] text-gray-400">시스템 마스터</div>
-                    </div>
-                    <div
-                        class="w-8 h-8 bg-gray-800 border border-red-500 rounded-full flex items-center justify-center font-bold text-red-500 text-[9px]"
-                    >
-                        GM
+                    <div class="flex items-center gap-3 border-l border-white/10 pl-4 text-white">
+                        <div class="text-right hidden sm:block">
+                            <div class="text-xs font-bold tracking-wide">남찬우</div>
+                            <div class="text-[10px] text-neutral-400">시스템 마스터</div>
+                        </div>
+                        <div
+                            class="w-8 h-8 bg-neutral-900 border border-red-500 rounded-full flex items-center justify-center font-bold text-red-500 text-[9px] drop-shadow-[0_0_5px_rgba(239,68,68,0.5)]"
+                        >
+                            GM
+                        </div>
                     </div>
                 </div>
             </div>
@@ -467,5 +463,135 @@
                 ▶
             </button>
         </div>
+        <div
+            id="miniPlayer"
+            class="fixed bottom-6 right-6 z-[90] bg-black/95 border border-neutral-800 rounded-xl p-4 w-[360px] shadow-[0_0_30px_rgba(0,0,0,0.9)] flex items-center gap-4 text-white"
+        >
+            <audio id="bgmAudio" src="sound/guilty_remix.mp3" preload="auto" loop></audio>
+
+            <div class="relative w-16 h-16 flex-shrink-0">
+                <img
+                    id="playerCdImg"
+                    src="img/logo.png"
+                    alt="Album Art"
+                    class="w-full h-full rounded-full object-cover border-2 border-red-600/80 shadow-[0_0_10px_rgba(220,38,38,0.3)]"
+                />
+                <div class="absolute inset-0 m-auto w-3 h-3 bg-black border border-neutral-800 rounded-full"></div>
+            </div>
+
+            <div class="flex-1 flex flex-col space-y-1.5 min-w-0">
+                <div class="flex justify-between items-start">
+                    <div class="truncate pr-2">
+                        <p id="playerTrackTitle" class="text-sm font-extrabold text-red-400 tracking-wide truncate">
+                            guilty gear still in the dark cover
+                        </p>
+                        <p id="playerArtist" class="text-[11px] text-gray-400 font-medium truncate">
+                            System Master OST
+                        </p>
+                    </div>
+                    <span class="text-xs text-red-500 font-bold drop-shadow-[0_0_5px_rgba(239,68,68,0.5)] animate-pulse"
+                        >🎵</span
+                    >
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span id="playerCurrentTime" class="text-[10px] font-mono text-gray-400 flex-shrink-0">00:00</span>
+                    <input
+                        id="playerProgressBar"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="0"
+                        class="w-full h-1 bg-neutral-800 accent-red-600 rounded-lg cursor-pointer outline-none transition-all"
+                    />
+                    <span id="playerDuration" class="text-[10px] font-mono text-gray-400 flex-shrink-0">00:00</span>
+                </div>
+                <div class="flex items-center justify-center gap-6 pt-1">
+                    <button
+                        id="playerPrevBtn"
+                        class="text-neutral-400 hover:text-red-500 transition-colors duration-200 outline-none"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <polygon points="11 19 2 12 11 5 11 19"></polygon>
+                            <polygon points="22 19 13 12 22 5 22 19"></polygon>
+                        </svg>
+                    </button>
+
+                    <button
+                        id="playerPlayBtn"
+                        class="w-8 h-8 bg-red-950/30 border border-red-700/50 rounded-full text-red-500 flex items-center justify-center hover:bg-red-900/60 hover:text-white hover:scale-105 transition-all shadow-[0_0_10px_rgba(239,68,68,0.2)] hover:shadow-[0_0_15px_rgba(239,68,68,0.6)] outline-none"
+                    >
+                        <svg
+                            id="playIconSvg"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="ml-0.5"
+                        >
+                            <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                        </svg>
+                    </button>
+
+                    <button
+                        id="playerNextBtn"
+                        class="text-neutral-400 hover:text-red-500 transition-colors duration-200 outline-none"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <polygon points="13 19 22 12 13 5 13 19"></polygon>
+                            <polygon points="2 19 11 12 2 5 2 19"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            #playerProgressBar::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: #ef4444;
+                border: 1px solid #ffffff;
+            }
+            @keyframes spin-cd {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            .animate-spin-cd {
+                animation: spin-cd 8s linear infinite;
+            }
+        </style>
     </body>
 </html>
