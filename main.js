@@ -20,7 +20,165 @@ document.addEventListener("DOMContentLoaded", () => {
             slides[currentSlideIndex].classList.add("opacity-100");
         }, 6500); // 5000ms = 정확히 5초 주기 무한 순환 연산
     }
+    // =================================================================================
+    // ⚡ [CACHE SYSTEM] 직업 / NPC / 보스 / 스킬 전역 이미지 백그라운드 사전 캐싱 엔진
+    // =================================================================================
+    window.addEventListener("load", () => {
+        // 🌍 GM님의 실제 폴더 내 파일명과 100% 동기화된 캐싱 마스터 리스트 (한글/영어 불문)
+        const imagesToPreload = [
+            // 1. 시스템 공통 자산
+            "img/logo.png",
 
+            // 2. [CATEGORY 02] 직업 및 서브클래스 아카이브 (한글 파일명 완벽 수용)
+            "class/바바리안.jpeg",
+            "class/전사.jpeg",
+            "class/무투가.jpeg",
+            "class/로그.jpeg",
+            "class/궁수.jpeg",
+            "class/레인저.jpeg",
+            "class/마법사.jpeg",
+            "class/소환법사.jpeg",
+            "class/이교도.jpeg",
+            "class/마령술사.jpeg",
+            "class/종말예언자.jpeg",
+            "subclass/용기사.jpeg",
+            "subclass/라그나로크.jpeg",
+            "subclass/스파르탄.jpeg",
+            "subclass/성기사.jpeg",
+            "subclass/마검사.jpeg",
+            "subclass/왕실기사.jpeg",
+            "subclass/챔피언.jpeg",
+            "subclass/주먹왕 랄프.jpeg",
+            "subclass/야쿠자.jpeg",
+            "subclass/도적.jpeg",
+            "subclass/팬텀.jpeg",
+            "subclass/암살자.jpeg",
+            "subclass/총검사.jpeg",
+            "subclass/이도류검사.jpeg",
+            "subclass/로빈후드.jpeg",
+            "subclass/거너.jpeg",
+            "subclass/런처.jpeg",
+            "subclass/메카닉.jpeg",
+            "subclass/불법사.jpeg",
+            "subclass/얼음법사.jpeg",
+            "subclass/용언사용자.jpeg",
+            "subclass/정령사.jpeg",
+            "subclass/네크로맨서.jpeg",
+            "subclass/마물술사.jpeg",
+            "subclass/흑마법사.jpeg",
+            "subclass/연금술사.jpeg",
+            "subclass/무당.jpeg",
+            "subclass/구미호.jpeg",
+            "subclass/서큐버스.jpeg",
+            "subclass/타천사.jpeg",
+            "subclass/금속기바알.jpeg",
+            "subclass/금속기아스타로트.jpeg",
+            "subclass/금속기아몬.jpeg",
+            "cha/드래곤본 카리아.jpeg",
+            "cha/드래곤본 롱기누스.jpeg",
+            "cha/독성 구속자.jpeg",
+            "cha/듀얼리스트.jpeg",
+            "cha/엘프의왕.jpeg",
+            "cha/바바리안 대족장.jpeg",
+            "cha/정령술사.jpeg",
+            "cha/천군.jpeg",
+            "cha/무신.jpeg",
+            "cha/락토르.jpeg",
+            "cha/로아이아스.jpeg",
+            "cha/메카니스트.jpeg",
+
+            // 3. [CATEGORY 03] NPC 소개 분파 자산
+            "npc/레아.jpeg",
+            "npc/카리아 1막.jpeg",
+            "npc/토르간.jpeg",
+            "npc/진실의호수.jpeg",
+            "npc/카일리.jpeg",
+            "npc/카리아 전투모드.jpeg",
+
+            // 4. [v15.0.0 CORE] 메인 / 히든 보스 일러스트 소스
+            "boss/파스칼1차.jpeg",
+            "boss/파스칼2차.jpeg",
+            "boss/운디네1차.jpeg",
+            "boss/운디네2차.jpeg",
+            "boss/용왕1.jpeg",
+            "boss/용왕2.jpeg",
+            "boss/롱기누스 고룡화.jpeg",
+            "boss/마왕1.jpeg",
+            "boss/마왕2.jpeg",
+            "boss/마왕3.jpeg",
+            "boss/마왕4.jpeg",
+            "boss/우두막시키.jpeg",
+            "boss/네파포비.jpeg",
+            "boss/재문필.jpeg",
+            "boss/whtjs021.jpeg",
+            "boss/whtjs022.jpeg",
+            "boss/whtjs02_3.jpeg",
+            "boss/마일드1.jpeg",
+            "boss/마일드2.jpeg",
+
+            // 5. 보스 고유 기믹 & 스킬 매트릭스 그래픽 자산
+            "bosskil/파스칼대지분쇄격.jpeg",
+            "bosskil/파스칼휠윈드.jpeg",
+            "bosskil/운디네패시브.jpeg",
+            "bosskil/운디네패시브2.jpeg",
+            "bosskil/운디네액티브.jpeg",
+            "bosskil/운디네궁극기.jpeg",
+            "bosskil/롱기누스1패시브.jpeg",
+            "bosskil/롱기누스1기믹.jpeg",
+            "bosskil/롱기누스2패시브.jpeg",
+            "bosskil/롱기누스2액티브.jpeg",
+            "bosskil/롱기누스3궁극기.jpeg",
+            "bosskil/마왕1액티브1.jpeg",
+            "bosskil/마왕1액티브2.jpeg",
+            "bosskil/마왕2궁극기.jpeg",
+            "bosskil/마왕3패시브.jpeg",
+            "bosskil/마왕4궁극기.jpeg",
+            "hbosskil/우두막시키_과열.jpeg",
+            "hbosskil/우두막시키_숏킬.jpeg",
+            "hbosskil/우두막시키_타임투킬.jpeg",
+            "hbosskil/우두막시키_쇼타임.jpeg",
+            "hbosskil/네파포비_충전.jpeg",
+            "hbosskil/네파포비_포식.jpeg",
+            "hbosskil/재문필_시련.jpeg",
+            "hbosskil/재문필_신궁.jpeg",
+            "hbosskil/재문필_돌진.jpeg",
+            "hbosskil/재문필_대요격활.jpeg",
+            "hbosskil/whtjs02_인체회로.jpeg",
+            "hbosskil/whtjs02_염벽.jpeg",
+            "hbosskil/whtjs02_아모르사이카.jpeg",
+            "hbosskil/whtjs02_벨카.jpeg",
+            "hbosskil/whtjs02_젤사이카.jpeg",
+            "hbosskil/whtjs02_아르바도르.jpeg",
+            "hbosskil/whtjs02_진아몬패시브.jpeg",
+            "hbosskil/whtjs02_아모라이즈.jpeg",
+            "hbosskil/whtjs02_고라이돈.jpeg",
+            "hbosskil/whtjs02_라이징카.jpeg",
+            "hbosskil/whtjs02_진아르바도르.jpeg",
+            "hbosskil/마일드_신생패시브.jpeg",
+            "hbosskil/마일드_폭주격타.jpeg",
+            "hbosskil/마일드_고통포효.jpeg",
+            "hbosskil/마일드_군주패시브.jpeg",
+            "hbosskil/마일드_손목저격.jpeg",
+            "hbosskil/마일드_마력탄.jpeg",
+            "hbosskil/마일드_지각방어.jpeg",
+            "hbosskil/마일드_군세소환.jpeg",
+        ];
+
+        console.log(
+            "🔄 [CACHE ENGINE] 총 " + imagesToPreload.length + "개의 TRPG 그래픽 자산 동기화 캐싱을 시작합니다...",
+        );
+
+        // 3. 비동기 멀티 스레딩 사전 로딩 루틴
+        imagesToPreload.forEach((src) => {
+            const img = new Image();
+            img.src = src; // 주소가 주입되는 순간 브라우저 램(RAM) 영역에 상시 적재 처리됩니다.
+
+            img.onerror = () => {
+                // 혹시 실제 폴더에 파일이 없거나 확장자(.jpg / .jpeg) 오타 시 콘솔로 바로 잡아내는 방어막
+                console.warn(`⚠️ [CACHE FAIL] 실제 경로명 혹은 확장자 확인 필요 -> ${src}`);
+            };
+        });
+    });
     // =================================================================================
     // 1. 기존 런처 팝업 및 게이지 애니메이션 로직 (여기서부터 기존 코드가 이어집니다...)
     // =================================================================================
@@ -1609,7 +1767,7 @@ window.addEventListener("load", () => {
     // 1. 오디오 재생 목록 데이터베이스 명세 (영어 경로 고정)
     const playlist = [
         {
-            title: "guilty gear still in the dark cover",
+            title: "Still in the dark cover",
             artist: "System Master OST",
             src: "sound/guilty_remix.mp3",
             cover: "micon/GTG.jpeg",
