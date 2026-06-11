@@ -1784,6 +1784,18 @@ window.addEventListener("load", () => {
             src: "sound/Pursuit_and_Annihilation_Battle.mp3",
             cover: "micon/WRD.jpeg",
         },
+        {
+            title: "Ticking_Musicbox_Rage",
+            artist: "운디네 보스전 메인 타이틀",
+            src: "sound/Ticking_Musicbox_Rage.mp3",
+            cover: "micon/REU.jpeg",
+        },
+        {
+            title: "DUHO_MILDOVER",
+            artist: "히든보스 마일드 전용 테마",
+            src: "sound/DUHO_MILDOVER.mp3",
+            cover: "micon/EJM.jpeg",
+        },
     ];
 
     let currentTrackIndex = 0;
